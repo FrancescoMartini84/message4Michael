@@ -1,61 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Message for Michael</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Patterns & Data Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1, h2 { color: #2c3e50; }
+        
+        /* Responsive video container */
+        .video-wrapper {
+            width: 100%;
+            margin-bottom: 30px;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            background-color: #000;
+        }
+        video {
+            width: 100%;
+            display: block;
+        }
 
-<style>
-body{
-font-family: Arial;
-background:#111;
-color:white;
-text-align:center;
-margin-top:120px;
-}
-
-h1{
-font-size:40px;
-}
-
-p{
-font-size:22px;
-max-width:700px;
-margin:auto;
-}
-</style>
-
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        textarea {
+            width: 100%;
+            height: 90px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+            font-family: inherit;
+        }
+        textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s ease;
+        }
+        button:hover { background-color: #2980b9; }
+        
+        .output {
+            margin-top: 25px;
+            padding: 20px;
+            background: #e8f4f8;
+            border-left: 5px solid #3498db;
+            border-radius: 0 4px 4px 0;
+            display: none;
+        }
+        .output h3 { margin-top: 0; color: #2980b9; }
+        .response-block {
+            margin-bottom: 15px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: 1px solid #d4e6ee;
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Message for Michael</h1>
+<div class="container">
+    <h1>Data Analysis in Daily Life 📊</h1>
+    <h2><em>Welcome, <strong>Dr. Martínez!</strong></em></h2>
+    <p>We analyze data every day to optimize our happiness, productivity, and habits. Watch the video below, then reflect on your own patterns.</p>
+    
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
-<h2>Philippians 1:3</h2>
-<p>I thank my God every time I remember you.</p>
+    <h2>🎬 Watch the full video <a href="https://d3c33hcgiwev3.cloudfront.net/LZ93fPpPTTSfd3z6T900lw.processed/full/540p/index.webm?Expires=1782259200&Signature=K~T9ififFAxktgeBKNhoNTSQ0CbfNPU9vLq5LIIoexRl8vCDl~2fxAfX43x7X2TsSveP2GkZjvJGotsdgqkZItBJvbg~qbpn~6dZQO3JsOXwqq6IZLfmyv0nJXC1AQ6VBxRzEPrf-bSWptk4FB25JTlVKsO1ezM4c4F2twzuoMs_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A" target="_blank">here</a></h2>
+    <div class="video-wrapper">
+        <video controls preload="metadata">
+            <source src="https://online.hitpaw.com/sgp-s3/static/2026-06-22/B1i9jhFHgtmVB67hxAUNesXR/outputs/H2YdevWgjC1DVX5uEmz5N0XW.mp4?filename=index_hitpaw.com.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
-<h2>Job 14:7-9</h2>
-<p>
-For there is hope for a tree: if it is cut down, it will sprout again,
-and its new shoots will not fail.
-</p>
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
-<h3>Interactive Version</h3>
+    <h2>🧠 Your Reflection Workspace</h2>
+    <form id="patternForm">
+        <div class="form-group">
+            <label for="q1">1. What patterns in your day-to-day experiences have you recently noticed?</label>
+            <textarea id="q1" placeholder="e.g., Identifying spikes in energy levels at certain times, patterns in productivity..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="q2">2. What patterns and relationships have you recently identified in your life?</label>
+            <textarea id="q2" placeholder="e.g., The relationship between getting early rest and overall daily baseline success..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="q3">3. What have you predicted or what conclusions have you drawn based on these relationships and patterns you may probably have noticed in your life?</label>
+            <textarea id="q3" placeholder="e.g., Predicting that early to bed and early to rise will consistently yield the best results..."></textarea>
+        </div>
+        
+        <button type="button" onclick="processData()">Analyze My Patterns</button>
+    </form>
 
-<p>
-If you want to see the interactive version of this message,
-download the script and run it in a terminal.
-</p>
+    <div id="results" class="output">
+        <h3>🎉 Insights Recorded!</h3>
+        <div class="response-block" id="res1"></div>
+        <div class="response-block" id="res2"></div>
+        <div class="response-block" id="res3"></div>
+    </div>
+</div>
 
-<pre>
-python michael.py
-</pre>
+<script>
+    function processData() {
+        const q1 = document.getElementById('q1').value.trim();
+        const q2 = document.getElementById('q2').value.trim();
+        const q3 = document.getElementById('q3').value.trim();
 
-<p>
-Download it here:
-</p>
+        // Inject responses safely as plain text to prevent script injection (XSS)
+        document.getElementById('res1').innerText = `1. Noticed Patterns:\n${q1 || 'No response provided.'}`;
+        document.getElementById('res2').innerText = `2. Identified Relationships:\n${q2 || 'No response provided.'}`;
+        document.getElementById('res3').innerText = `3. Predictions / Conclusions:\n${q3 || 'No response provided.'}`;
 
-<a href="https://raw.githubusercontent.com/FrancescoMartini84/message4Michael/main/michael.py" download>
-Download michael.py
-</a>
+        // Reveal the hidden container
+        document.getElementById('results').style.display = 'block';
+        
+        // Smooth scroll to the results block
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 
 </body>
 </html>
