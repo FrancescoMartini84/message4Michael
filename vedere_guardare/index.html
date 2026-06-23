@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basic Italian Lessons</title>
+
+<style>
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #f8fafc;
+    color: #1e293b;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    margin-top: 20px;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #0f172a;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #475569;
+    margin-top: 30px;
+}
+
+video {
+    width: 100%;
+    max-width: 640px;
+    margin: 24px auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    background-color: #000;
+}
+
+button {
+    padding: 12px 20px;
+    margin: 8px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    background: #3b82f6;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+#textBox {
+    max-width: 750px;
+    margin: 30px auto;
+    line-height: 1.8;
+    font-size: 20px;
+    font-weight: 400;
+    color: #334155;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    display: none;
+    text-align: left;
+    white-space: pre-line;
+}
+
+#readBtn {
+    display: none;
+    background: #10b981;
+    font-size: 16px;
+    padding: 14px 24px;
+   margin-top: 10px;
+}
+
+#readBtn:hover {
+    background: #059669;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Basic Italian Lessons</h1>
+<h2>VEDERE VS GUARDARE - What's the difference? | Common mistake in Italian</h2>
+
+<video id="myVideo" controls onplay="stopAudio()">
+    <source src="cut_output.mp4" type="video/mp4">
+</video>
+
+<h2>Choose Your Preferred Language</h2>
+
+<button onclick="setLanguage('it')">🇮🇹 Italiano</button>
+<button onclick="setLanguage('es')">🇪🇸 Español</button>
+<button onclick="setLanguage('de')">🇩🇪 Deutsch</button>
+<button onclick="setLanguage('en')">🇬🇧 English</button>
+
+<div id="textBox"></div>
+
+<button id="readBtn" onclick="playAudio()"></button>
+
+<script>
+const content = {
+    it: {
+        text: `Questa parola fu rivolta a Geremia dal Signore: «Che cosa vedi, Geremia?». Risposi: «Vedo un ramo di mandorlo». Il Signore soggiunse: «Hai visto bene, poiché io vigilo sulla mia parola per realizzarla». Ora vediamo come in uno specchio, in maniera confusa; ma allora vedremo a faccia a faccia. perché noi non fissiamo lo sguardo sulle cose visibili, ma su quelle invisibili. Le cose visibili sono d'un momento, quelle invisibili sono eterne.`,
+        button: "Per migliorare la tua esperienza mentre leggi, clicca qui",
+        audio: "it.mp3"
+    },
+    es: {
+        text: `Palabra que vino de Jehová a Jeremías, diciendo: ¿Qué ves tú, Jeremías? Y dije: Veo una vara de almendro. Y me dijo Jehová: Bien has visto; porque yo apresuro mi palabra para ponerla por obra. Ahora vemos por espejo, oscuramente; mas entonces veremos cara a cara. no mirando nosotros las cosas que se ven, sino las que no se ven; pues las cosas que se ven son temporales, pero las que no se ven son eternas.`,
+        button: "Para mejorar tu experiencia mientras lees, haz clic aquí",
+        audio: "es.mp3"
+    },
+    de: {
+        text: `Dies ist das Wort, das zu Jeremia geschah vom HERRN und sprach: Jeremia, was siehst du? Ich sprach: Ich sehe einen erwachenden Zweig. Und der HERR sprach zu mir: Du hast recht gesehen; denn ich will wachen über mein Wort, daß ich's tue. Wir sehen jetzt durch einen Spiegel in einem dunkeln Wort; dann aber von Angesicht zu Angesicht. uns, die wir nicht sehen auf das Sichtbare, sondern auf das Unsichtbare. Denn was sichtbar ist, das ist zeitlich; was aber unsichtbar ist, das ist ewig.`,
+        button: "Um dein Erlebnis beim Lesen zu verbessern, klicke hier",
+        audio: "de.mp3"
+    },
+    en: {
+        text: `The word that came to Jeremiah from the Lord, saying, Jeremiah, what seest thou? And I said, I see a rod of an almond tree. Then said the Lord unto me, Thou hast well seen: for I will hasten my word to perform it. For now we see through a glass, darkly; but then face to face: While we look not at the things which are seen, but at the things which are not seen: for the things which are seen are temporal; but the things which are not seen are eternal.`,
+        button: "To improve your experience as you read, click here",
+        audio: "en.mp3"
+    }
+};
+
+let currentAudioPath = null; 
+let activeAudioObject = null; 
+
+function setLanguage(lang) {
+    // Stop audio if language changes
+    stopAudio();
+
+    document.getElementById("textBox").style.display = "block";
+    document.getElementById("readBtn").style.display = "inline-block";
+
+    document.getElementById("textBox").innerText = content[lang].text;
+    document.getElementById("readBtn").innerText = content[lang].button;
+
+    currentAudioPath = content[lang].audio;
+}
+
+function stopAudio() {
+    if (activeAudioObject) {
+        activeAudioObject.pause();
+        activeAudioObject.currentTime = 0;
+        activeAudioObject = null;
+    }
+}
+
+function playAudio() {
+    // 1. Pause the video if it's currently playing
+    const video = document.getElementById("myVideo");
+    if (video && !video.paused) {
+        video.pause();
+    }
+
+    // 2. Play the audio track
+    if (currentAudioPath) {
+        stopAudio(); // Reset any existing audio instance
+
+        activeAudioObject = new Audio(currentAudioPath);
+        activeAudioObject.loop = false; 
+        activeAudioObject.play();
+    }
+}
+</script>
+
+</body>
